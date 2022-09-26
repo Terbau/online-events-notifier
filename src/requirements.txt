@@ -1,0 +1,4 @@
+uvloop==0.17.0
+discord.py==2.0.1
+asyncpg==0.26.0
+python-dotenv==0.21.0

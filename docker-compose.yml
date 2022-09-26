@@ -1,0 +1,26 @@
+version: "2.4"
+services:
+
+  python-app:
+    build: src
+    environment:
+        DISCORD_BOT_TOKEN: "YOUR_TOKEN_HERE"
+        DEFAULT_COMMAND_PREFIX: "!"
+        POSTGRES_HOST: "postgres-db"  # Don't change unless you change the name of the postgres container.
+        POSTGRES_PASSWORD: "abc123"  # Only change this if you also changed it below.
+    depends_on:
+      - "postgres-db"
+    volumes:
+        - ./src:/app/src
+    restart: unless-stopped
+
+  postgres-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: "abc123"  # Change this if you expose the port.
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    logging:
+      driver: none
+    restart: unless-stopped
+    
