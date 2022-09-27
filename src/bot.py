@@ -155,7 +155,19 @@ class OWNotifierBot(commands.Bot):
         )
         print("Database connection established.")
 
-        statements = []
+        statements = [
+            (
+                'CREATE TABLE IF NOT EXISTS ow_events ('
+                'id INTEGER PRIMARY KEY,'
+                'title TEXT,'
+                'description TEXT,'
+                'start_date TIMESTAMP,'
+                'end_date TIMESTAMP,'
+                'organizer INT,'
+                'last_updated TIMESTAMP'
+                ')'
+            ),
+        ]
         if statements:
             async with self.pool.acquire() as con:
                 await con.execute('\n'.join(statements))

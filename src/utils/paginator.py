@@ -149,9 +149,9 @@ class EmbedPaginator:
             async def waiter(event):
                 return await self.bot.wait_for(event, check=check)
 
-            tasks = [self.bot.loop.create_task(waiter('raw_reaction_add'))]
+            tasks = [asyncio.create_task(waiter('raw_reaction_add'))]
             if self.enable_unreactions:
-                tasks.append(self.bot.loop.create_task(waiter('raw_reaction_remove')))
+                tasks.append(asyncio.create_task(waiter('raw_reaction_remove')))
 
             done, pending = await asyncio.wait(
                 tasks,
